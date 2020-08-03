@@ -1,0 +1,15 @@
+.navbar-static-top {
+	margin-bottom: 20px;
+}
+
+.btn-primary {
+	color: black;
+	background-color: #f5cf47;
+	border-color: #f5cf47;
+}
+
+.btn-primary:hover {
+	background-color: #6D5501;
+	border-color: #6D5501;
+	color: white;
+}

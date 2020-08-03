@@ -1,0 +1,53 @@
+# Bleeding edge Django
+django==2.2.12
+
+# Django-Extensions
+django-extensions
+Werkzeug
+pyOpenSSL
+
+# Configuration
+django-environ
+envparse
+
+# Forms
+django-crispy-forms
+
+# Models
+django-model-utils
+
+# For user registration, either via email or social
+# Well-built with regular release cycles!
+django-allauth
+
+# Time zones support
+pytz
+
+# Password storage
+argon2-cffi
+
+# ======== Django Debug ==========
+django-cors-headers
+django-debug-toolbar
+
+# Generate random Data
+essential-generators
+random-timestamp
+
+# RESTful
+djangorestframework
+django-rest-swagger
+drf_yasg
+
+# DB
+mysqlclient
+
+# JSON
+jsonfield
+
+# Image Processing
+Pillow
+
+# ======== Django Admin ==========
+django-import-export
+django-admin-sortable2
