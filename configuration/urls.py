@@ -35,9 +35,10 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-    url(r'^swagger-ui/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^v1/swagger-ui/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui-v1'),
-    re_path('api/v1/', include('backend.urls', namespace='v1')),
+    # url(r'^swagger-ui/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    # url(r'^v1/swagger-ui/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui-v1'),
+    path('', include('frontend.urls')),
+    # re_path('api/v1/', include('backend.urls', namespace='v1')),
     # url(r'^api/v2/swagger-ui/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui-v2'),
     # re_path('api/v2/', include('backend.urls', namespace='v2')),
 ]
@@ -48,12 +49,12 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
-    # urlpatterns += [
-    #     url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
-    #     url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
-    #     url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
-    #     url(r'^500/$', default_views.server_error),
-    # ]
+    urlpatterns += [
+        url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
+        url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
+        url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
+        url(r'^500/$', default_views.server_error),
+    ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar
         urlpatterns = [

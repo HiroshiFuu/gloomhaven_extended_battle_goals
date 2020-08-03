@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Your stuff: custom apps go here
     'backend.apps.BackendConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -323,7 +324,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_ALLOW_REGISTRATION = True
 ACCOUNT_UNIQUE_EMAIL = False  # do not asking for unique email address
 LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/draw_battle_goal'
 
 
 # SLUGLIFIER
