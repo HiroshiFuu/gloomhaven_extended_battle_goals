@@ -3,11 +3,14 @@ from django.urls import path
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.utils.html import format_html
+from django.utils.translation import ugettext_lazy as _
 
 from .models import ActorGoal
 from .models import GoalState
 
 from .constants import BATTLE_GOALS
+
+from inline_actions.admin import InlineActionsModelAdminMixin
 
 import copy
 import random
@@ -39,17 +42,17 @@ class ActorGoalAdmin(admin.ModelAdmin):
         GOALS = copy.deepcopy(BATTLE_GOALS)
         drawn_goals = random.sample(GOALS, len(actors))
         # print(drawn_goals)
-        last_actor_goal = ActorGoal.objects.last()
+        last_actor_goal = ActorGoal.objects.order_by('batch').last()
         if last_actor_goal is None:
             last_batch = 1
         else:
             last_batch = last_actor_goal.batch + 1
         for index, actor in enumerate(actors):
             ActorGoal.objects.create(actor=actor, goal_img_path=drawn_goals[index], batch=last_batch)
-            state = GoalState.objects.all().first()
-            state.last_batch = last_batch
-            state.distributed = False
-            state.save()
+        state = GoalState.objects.all().first()
+        state.for_batch = last_batch
+        state.distributed = False
+        state.save()
         return HttpResponseRedirect('../')
 
     def goal_img_preview(self, obj):
@@ -66,9 +69,21 @@ class ActorGoalAdmin(admin.ModelAdmin):
 
 
 @admin.register(GoalState)
-class GoalStateAdmin(admin.ModelAdmin):
+class GoalStateAdmin(InlineActionsModelAdminMixin, admin.ModelAdmin):
     list_display = [
         'for_batch',
         'distributed',
         'modified_at',
     ]
+
+    def get_inline_actions(self, request, obj=None):
+        actions = super(GoalStateAdmin, self).get_inline_actions(request, obj)
+        if obj:
+            if not obj.distributed:
+                actions.append('distribute')
+        return actions
+
+    def distribute(self, request, obj, parent_obj=None):
+        obj.distributed = True
+        obj.save()
+    distribute.short_description = _("Distribute battle goals!")

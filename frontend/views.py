@@ -11,7 +11,7 @@ from .constants import BATTLE_GOALS
 @login_required(login_url='/accounts/login/')
 def draw_battle_goal(request):
 	actor = request.user
-	goal = ActorGoal.objects.filter(actor=actor).last()
+	goal = ActorGoal.objects.filter(actor=actor).order_by('batch').last()
 	img_path = goal.goal_img_path
 	state = GoalState.objects.filter(for_batch=goal.batch).first()
 	if state is None:
