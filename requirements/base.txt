@@ -1,5 +1,5 @@
 # Bleeding edge Django
-django==2.2.12
+django==2.2.13
 
 # Django-Extensions
 django-extensions
