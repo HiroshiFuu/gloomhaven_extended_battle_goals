@@ -22,7 +22,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['hiroshifuu.xyz', ])
 ALLOWED_HOSTS = ['*']
 
-INTERNAL_IPS = ['127.0.0.1', ]
+INTERNAL_IPS = ['127.0.0.1']
 
 
 # SECRET CONFIGURATION
@@ -30,12 +30,6 @@ INTERNAL_IPS = ['127.0.0.1', ]
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
 SECRET_KEY = '53f!i6&9t5d2xcw+sxtuvi^dm$g^&nol%h&@%sc)sk!z-c9^*('
-
-
-# MAIL SETTINGS
-# ------------------------------------------------------------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = str(ROOT_DIR.path('sent_emails'))
 
 
 # CACHING
@@ -88,6 +82,12 @@ DATABASES = {
         'NAME': os.path.join(str(ROOT_DIR), 'local.sqlite3'),
     }
 }
+
+
+# MAIL SETTINGS
+# ------------------------------------------------------------------------------
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = str(ROOT_DIR.path('sent_emails'))
 
 
 # LOGGING
