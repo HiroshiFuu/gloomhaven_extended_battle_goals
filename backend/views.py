@@ -168,6 +168,7 @@ class GetClientDetailsView(APIView):
                 else:
                     if is_routable:
                         print('The client\'s IP address is publicly routable on the Internet')
+                        print(request.META.get('HTTP_X_FORWARDED_FOR'))
                     else:
                         print('The client\'s IP address is private')
 
