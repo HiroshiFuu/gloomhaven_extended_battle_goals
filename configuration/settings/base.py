@@ -159,6 +159,7 @@ TEMPLATES = [
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
             str(CORE_DIR.path('templates')),
+            str(ROOT_DIR.path('frontend').path('templates')),
             # str(ROOT_DIR.path('apps').path('admin_portal').path('templates')),
         ],
         'OPTIONS': {
@@ -240,7 +241,7 @@ STATIC_URL = '/static/'
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
     str(ROOT_DIR.path('core', 'static')),
-    # str(ROOT_DIR.path('backend', 'static')),
+    str(ROOT_DIR.path('frontend', 'static')),
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
