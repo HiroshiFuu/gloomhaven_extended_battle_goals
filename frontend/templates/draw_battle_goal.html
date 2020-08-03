@@ -1,0 +1,34 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Battle Goal</title>
+	<style>
+		.center {
+			display: block;
+			margin-top: 10%;
+			margin-left: auto;
+			margin-right: auto;
+			width: 592px;
+		}
+	</style>
+</head>
+
+<body>
+	<img id="goal" src="{{ img_path }}" alt="Battle Goal" class="center" style="display: none;">
+	<h1 id="info" class="center" style="display: inherit;">Wait for master to distribute the goals...</h1>
+	<!-- jQuery -->
+	<script src="/static/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// console.log("img_path: {{ img_path }}")
+			{% if distributed %}
+				document.getElementById("goal").style.display = "block";
+				document.getElementById("info").style.display = "none";
+			{% endif %}
+		});
+	</script>
+</body>
+
+</html>
