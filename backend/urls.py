@@ -16,15 +16,12 @@ from .views import GetTimeseriesOfHospitalHealthStatsByIdView
 from .views import GetListOfAllHospitalsDataView
 from .views import GetHospitalDataByIdView
 from .views import GetListOfRegionsView
-from .views import GetClientDetailsView
 
 from .views import custom404
 
 app_name = 'backend'
 
 urlpatterns = [
-    re_path(r'actor$', GetClientDetailsView.as_view(), name='actor'),
-
     re_path(r'auth/login$', CustomObtainAuthTokenView.as_view(), name='token-auth_login'),
     re_path(r'auth/logout$', DestoryObtainAuthTokenView.as_view(), name='token-auth_logout'),
     re_path(r'auth/user$', GetUserView.as_view(), name='token-auth_user'),

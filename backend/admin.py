@@ -16,7 +16,7 @@ from .models import XrayAnalysisFinding
 from .models import PatientInfo
 # from .models import Configuration
 
-# Register your models here.
+# Register your model's admin here.
 class ProvinceInline(admin.StackedInline):
     model = Province
     extra = 0
