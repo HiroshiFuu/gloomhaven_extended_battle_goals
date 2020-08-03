@@ -39,7 +39,8 @@ djangorestframework
 django-rest-swagger
 drf_yasg
 
-# DB
+# Databse connection
+# sudo apt-get install libmariadbclient-dev
 mysqlclient
 
 # JSON
