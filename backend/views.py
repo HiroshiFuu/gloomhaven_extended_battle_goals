@@ -172,10 +172,13 @@ class GetClientDetailsView(APIView):
                         print('The client\'s IP address is private')
 
                 print('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR'))
+                print('X_FORWARDED_FOR', request.META.get('X_FORWARDED_FOR'))
                 print('REMOTE_ADDR', request.META.get('REMOTE_ADDR'))
                 print('HTTP_X_REAL_IP', request.META.get('HTTP_X_REAL_IP'))
                 print('HTTP_CLIENT_IP', request.META.get('HTTP_CLIENT_IP'))
                 print('HTTP_VIA', request.META.get('HTTP_VIA'))
+
+                return Response({})
             except Exception as e:
                 import traceback
                 traceback.print_exc()
