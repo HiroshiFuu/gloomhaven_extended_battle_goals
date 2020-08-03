@@ -52,3 +52,4 @@ Pillow
 # ======== Django Admin ==========
 django-import-export
 django-admin-sortable2
+django-inline-actions

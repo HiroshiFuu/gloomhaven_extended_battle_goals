@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     'import_export',
     'adminsortable2',
+    'inline_actions',
 ]
 
 # Apps specific for this project go here.
