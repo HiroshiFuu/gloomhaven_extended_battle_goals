@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from django.db.models import Count
 from django.db.models import Case
@@ -101,6 +102,11 @@ HEALTH_STATS_DATA = {
 
 TEST_DATA_DATE = '2020-06-10'
 
+REST_FRAMEWORK = getattr(settings, 'REST_FRAMEWORK', None)
+ALLOWED_VERSIONS = REST_FRAMEWORK.get('ALLOWED_VERSIONS', '')
+
+from ipware import get_client_ip
+
 # Create your views here.
 def get_health_stats_data_from_hospitals(hospitals, image_date=TEST_DATA_DATE):
     # print(image_date)
@@ -147,6 +153,40 @@ def get_health_stats_data_from_hospitals(hospitals, image_date=TEST_DATA_DATE):
                 diseases[name]['ageGroup'][finding['medical_image__patient_info__age_group']] += 1
     health_stats['diseases'] = diseases
     return health_stats
+
+class GetClientDetailsView(APIView):
+
+    @swagger_auto_schema(security=[], responses={200: openapi.Response('Actor Details')}, tags=['Actor'])
+    def get(self, request, version=None):
+        if request.version in ALLOWED_VERSIONS:
+            try:
+                ip, is_routable = get_client_ip(request, request_header_order=['X_FORWARDED_FOR', 'REMOTE_ADDR'])
+                print(ip)
+                print(is_routable)
+                if ip is None:
+                    print('Unable to get the client\'s IP address')
+                else:
+                    if is_routable:
+                        print('The client\'s IP address is publicly routable on the Internet')
+                    else:
+                        print('The client\'s IP address is private')
+
+                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                if x_forwarded_for:
+                    ip = x_forwarded_for.split(',')[-1].strip()
+                    print('HTTP_X_FORWARDED_FOR', ip)
+                else:
+                    ip = request.META.get('REMOTE_ADDR')
+                    print('REMOTE_ADDR', ip)
+                return Response({})
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                res_data = copy.deepcopy(RESPONSE_500_DATA)
+                res_data['message'] = traceback.format_exc()
+                return Response(data=res_data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            return Response(data=RESPONSE_404_VERSION, status=status.HTTP_404_NOT_FOUND)
 
 
 class CustomObtainAuthTokenView(APIView):
