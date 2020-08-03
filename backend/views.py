@@ -168,18 +168,14 @@ class GetClientDetailsView(APIView):
                 else:
                     if is_routable:
                         print('The client\'s IP address is publicly routable on the Internet')
-                        print(request.META.get('HTTP_X_FORWARDED_FOR'))
                     else:
                         print('The client\'s IP address is private')
 
-                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-                if x_forwarded_for:
-                    ip = x_forwarded_for.split(',')[-1].strip()
-                    print('HTTP_X_FORWARDED_FOR', ip)
-                else:
-                    ip = request.META.get('REMOTE_ADDR')
-                    print('REMOTE_ADDR', ip)
-                return Response({})
+                print('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR'))
+                print('REMOTE_ADDR', request.META.get('REMOTE_ADDR'))
+                print('HTTP_X_REAL_IP', request.META.get('HTTP_X_REAL_IP'))
+                print('HTTP_CLIENT_IP', request.META.get('HTTP_CLIENT_IP'))
+                print('HTTP_VIA', request.META.get('HTTP_VIA'))
             except Exception as e:
                 import traceback
                 traceback.print_exc()
