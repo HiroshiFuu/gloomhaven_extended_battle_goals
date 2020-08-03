@@ -80,12 +80,6 @@ INSTALLED_APPS += [
 ]
 
 
-# local-apps
-# ------------------------------------------------------------------------------
-INSTALLED_APPS += [
-]
-
-
 # DATABASES
 # ------------------------------------------------------------------------------
 DATABASES = {
@@ -121,7 +115,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': str(ROOT_DIR) + 'debug.log',
+            'filename': str(ROOT_DIR) + '/debug.log',
         },
     },
     'loggers': {
