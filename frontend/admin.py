@@ -49,10 +49,7 @@ class ActorGoalAdmin(admin.ModelAdmin):
             last_batch = last_actor_goal.batch + 1
         for index, actor in enumerate(actors):
             ActorGoal.objects.create(actor=actor, goal_img_path=drawn_goals[index], batch=last_batch)
-        state = GoalState.objects.all().first()
-        state.for_batch = last_batch
-        state.distributed = False
-        state.save()
+        state = GoalState.objects.create(for_batch=last_batch, distributed=False)
         return HttpResponseRedirect('../')
 
     def goal_img_preview(self, obj):
