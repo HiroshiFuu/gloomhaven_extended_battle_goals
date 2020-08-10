@@ -30,9 +30,10 @@ argon2-cffi
 django-cors-headers
 django-debug-toolbar
 
-# Generate random Data
-essential-generators
-random-timestamp
+# ======== Django Admin ==========
+django-import-export
+django-admin-sortable2
+django-inline-actions
 
 # RESTful
 djangorestframework
@@ -42,14 +43,3 @@ drf_yasg
 # Databse connection
 # sudo apt-get install libmariadbclient-dev
 mysqlclient
-
-# JSON
-jsonfield
-
-# Image Processing
-Pillow
-
-# ======== Django Admin ==========
-django-import-export
-django-admin-sortable2
-django-inline-actions
