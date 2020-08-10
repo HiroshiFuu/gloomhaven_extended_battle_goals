@@ -22,7 +22,9 @@ class LogMixin(models.Model):
 
 class ActorGoal(LogMixin):
     actor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    goal_img_path = models.CharField('Goal Image Path', max_length=127)
+    drawn_goal_1_img_path = models.CharField('Drawn Goal 1 Image Path', max_length=127)
+    drawn_goal_2_img_path = models.CharField('Drawn Goal 2 Image Path', max_length=127)
+    selected_goal_img_path = models.CharField('Selected Goal Image Path', max_length=127, null=True)
     batch = models.PositiveIntegerField('Batch')
 
     class Meta:
@@ -32,7 +34,7 @@ class ActorGoal(LogMixin):
         ordering = ['-created_at']
 
     def __str__(self):
-        return '{}: {} {}'.format(self.actor, self.batch, self.goal_img_path)
+        return '{}: {} {}'.format(self.actor, self.batch, self.selected_goal_img_path)
 
 
 class GoalState(LogMixin):

@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
                 ('modified_at', models.DateTimeField(blank=True, editable=False, null=True, verbose_name='Modified At')),
-                ('goal_img_path', models.CharField(max_length=127, verbose_name='Goal Image Path')),
+                ('selected_goal_img_path', models.CharField(max_length=127, verbose_name='Selected Goal Image Path')),
                 ('batch', models.PositiveIntegerField(verbose_name='Batch')),
                 ('actor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
