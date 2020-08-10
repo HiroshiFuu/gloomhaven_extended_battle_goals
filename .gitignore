@@ -1,6 +1,7 @@
 ### Comply with HPE Cyber-Security Policy
 .env
 certs/
+local.sqlite3
 
 
 # Created by https://www.gitignore.io/api/django
