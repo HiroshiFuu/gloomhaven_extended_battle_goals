@@ -42,6 +42,12 @@ CACHES = {
 }
 
 
+# PASSWORD VALIDATION
+# https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
+# ------------------------------------------------------------------------------
+AUTH_PASSWORD_VALIDATORS = []
+
+
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 MIDDLEWARE += [
