@@ -24,7 +24,7 @@
 		<h1 id="info" class="text-center mt10" hidden="hidden">Wait for master to distribute the goals...</h1>
 		{% else %}
 			{% if not img_path %}
-			<form id="fm" action="#" method="post">
+			<form id="fm" action="{% url 'frontend:selected_battle_goal' %}" method="post">
 				{% csrf_token %}
 				<div class="row">
 					<div class="col text-center">
