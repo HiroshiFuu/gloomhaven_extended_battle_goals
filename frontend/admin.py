@@ -55,13 +55,13 @@ class ActorGoalAdmin(admin.ModelAdmin):
         return HttpResponseRedirect('../')
 
     def goal_img_preview(self, obj):
-        goal_id = 'goal_' + str(obj.id)
         if obj.selected_goal_img_path:
             goal_name = obj.selected_goal_img_path.split('/')[-1].split('.')[0]
+            goal_id = 'goal_' + str(obj.id) + '_' + goal_name
             # print(obj.selected_goal_img_path, goal_name)
             return format_html(
                 '''
-                <img id="{}" style="display:none; position:absolute; top:50px; left:-50px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
+                <img id="{}" style="display:none; position:absolute; top:50px; left:0px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
                 <div style="font-size:12pt; position:relative; cursor:pointer;" 
                 onmouseover="document.getElementById('{}').style.display='block'; position: 'relative'; document.getElementById('{}').style.left=this.getBoundingClientRect().left+'px'; document.getElementById('{}').style.cursor='pointer';"
                 onmouseout="document.getElementById('{}').style.display='none';">{}</div>
@@ -70,24 +70,24 @@ class ActorGoalAdmin(admin.ModelAdmin):
             return ''
 
     def drawn_img_1_preview(self, obj):
-        goal_id = 'goal_' + str(obj.id)
         goal_name = obj.drawn_goal_1_img_path.split('/')[-1].split('.')[0]
+        goal_id = 'goal_' + str(obj.id) + '_' + goal_name
         # print(obj.drawn_goal_1_img_path, goal_name)
         return format_html(
             '''
-            <img id="{}" style="display:none; position:absolute; top:50px; left:-50px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
+            <img id="{}" style="display:none; position:absolute; top:50px; left:0px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
             <div style="font-size:12pt; position:relative; cursor:pointer;" 
             onmouseover="document.getElementById('{}').style.display='block'; position: 'relative'; document.getElementById('{}').style.left=this.getBoundingClientRect().left+'px'; document.getElementById('{}').style.cursor='pointer';"
             onmouseout="document.getElementById('{}').style.display='none';">{}</div>
             '''.format(goal_id, obj.drawn_goal_1_img_path, goal_id, goal_id, goal_id, goal_id, goal_name))
 
     def drawn_img_2_preview(self, obj):
-        goal_id = 'goal_' + str(obj.id)
         goal_name = obj.drawn_goal_2_img_path.split('/')[-1].split('.')[0]
+        goal_id = 'goal_' + str(obj.id) + '_' + goal_name
         # print(obj.drawn_goal_2_img_path, goal_name)
         return format_html(
             '''
-            <img id="{}" style="display:none; position:absolute; top:50px; left:-50px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
+            <img id="{}" style="display:none; position:absolute; top:50px; left:0px); height:calc(297px); width:calc(210px); border:3px solid; z-index:1000;" src="{}" />
             <div style="font-size:12pt; position:relative; cursor:pointer;" 
             onmouseover="document.getElementById('{}').style.display='block'; position: 'relative'; document.getElementById('{}').style.left=this.getBoundingClientRect().left+'px'; document.getElementById('{}').style.cursor='pointer';"
             onmouseout="document.getElementById('{}').style.display='none';">{}</div>
