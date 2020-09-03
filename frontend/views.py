@@ -10,6 +10,8 @@ from .models import GoalState
 
 from .constants import BATTLE_GOALS
 
+import os
+
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def draw_battle_goal(request):
@@ -28,12 +30,14 @@ def draw_battle_goal(request):
     img_path = goal.selected_goal_img_path
     img_path_1 = goal.drawn_goal_1_img_path
     img_path_2 = goal.drawn_goal_2_img_path
+    img_name_1 = os.path.splitext(os.path.basename(img_path_1))[0]
+    img_name_2 = os.path.splitext(os.path.basename(img_path_2))[0]
     state = GoalState.objects.filter(for_batch=goal.batch).first()
     if state is None:
         distributed = False
     else:
         distributed = state.distributed
-    return render(request, 'draw_battle_goal.html', {'img_path': img_path, 'img_path_1': img_path_1, 'img_path_2': img_path_2, 'distributed': distributed})
+    return render(request, 'draw_battle_goal.html', {'img_path': img_path, 'img_path_1': img_path_1, 'img_path_2': img_path_2, 'img_name_1': img_name_1, 'img_name_2': img_name_2, 'distributed': distributed})
 
 
 @login_required(login_url='/accounts/login/')

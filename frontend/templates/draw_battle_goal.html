@@ -21,7 +21,7 @@
 <body>
 	<div class="container">
 		{% if not distributed %}
-		<h1 id="info" class="text-center mt10" hidden="hidden">Wait for master to distribute the goals...</h1>
+		<h1 id="info" class="text-center mt10">Wait for master to distribute the goals...</h1>
 		{% else %}
 			{% if not img_path %}
 			<form id="fm" action="{% url 'frontend:selected_battle_goal' %}" method="post">
@@ -29,14 +29,14 @@
 				<div class="row">
 					<div class="col text-center">
 						<img id="goal_1" class="mx-auto mt10" src="{{ img_path_1 }}" alt="Battle Goal 1" style="width: 592px;">
-						<button id="btn_1" type="button" class="btn btn-dark btn-lg" onclick="select_battle_goal(2)" style="">Select This</button>
+						<button id="btn_1" type="button" class="btn btn-dark btn-lg" onclick="select_battle_goal(1)" style="">Select {{ img_name_1 }}</button>
 					</div>
 				</div>
 				<div style="height: 50px;"></div>
 				<div class="row">
 					<div class="col text-center">
 						<img id="goal_2" class="mx-auto mt10" src="{{ img_path_2 }}" alt="Battle Goal 2" style="width: 592px;">
-						<button id="btn_2" type="button" class="btn btn-dark btn-lg" onclick="select_battle_goal(2)" style="margin-bottom: 5%;">Select This</button>
+						<button id="btn_2" type="button" class="btn btn-dark btn-lg" onclick="select_battle_goal(2)" style="margin-bottom: 5%;">Select {{ img_name_2 }}</button>
 					</div>
 				</div>
 				<input id="selected" type="text" name="selected" hidden="hidden">
