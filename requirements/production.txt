@@ -1,1 +1,5 @@
+# Python client for Sentry
 raven
+
+# Web app to serve its own static files
+whitenoise
