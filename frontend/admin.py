@@ -96,6 +96,7 @@ class ActorGoalAdmin(admin.ModelAdmin):
 
 @admin.register(GoalState)
 class GoalStateAdmin(InlineActionsModelAdminMixin, admin.ModelAdmin):
+    change_list_template = 'change_list.html'
     list_display = [
         'for_batch',
         'distributed',
@@ -113,3 +114,27 @@ class GoalStateAdmin(InlineActionsModelAdminMixin, admin.ModelAdmin):
         obj.distributed = True
         obj.save()
     distribute.short_description = _("Distribute battle goals!")
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('draw_new_battle_goals/', self.draw_new_battle_goals, name='draw_new_battle_goals'),
+        ]
+        return my_urls + urls
+
+    def draw_new_battle_goals(self, request):
+        # self.message_user(request, 'Drawing new battle goals..')
+        actors = User.objects.all()
+        # print(actors)
+        GOALS = copy.deepcopy(BATTLE_GOALS)
+        drawn_goals = random.sample(GOALS, len(actors) * 2)
+        # print(drawn_goals)
+        last_actor_goal = ActorGoal.objects.order_by('batch').last()
+        if last_actor_goal is None:
+            last_batch = 1
+        else:
+            last_batch = last_actor_goal.batch + 1
+        for index, actor in enumerate(actors):
+            ActorGoal.objects.create(actor=actor, drawn_goal_1_img_path=drawn_goals[index * 2], drawn_goal_2_img_path=drawn_goals[index * 2 + 1], batch=last_batch)
+        state = GoalState.objects.create(for_batch=last_batch, distributed=False)
+        return HttpResponseRedirect('../')
