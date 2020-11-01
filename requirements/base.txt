@@ -1,5 +1,5 @@
 # Bleeding edge Django
-django==2.2.14
+django==2.2.16
 
 # Django-Extensions
 django-extensions
@@ -36,9 +36,9 @@ django-admin-sortable2
 django-inline-actions
 
 # RESTful
-djangorestframework
+djangorestframework==3.11.2
 django-rest-swagger
-drf_yasg
+drf_yasg==1.17.1
 
 # Databse connection
 # sudo apt-get install libmariadbclient-dev
